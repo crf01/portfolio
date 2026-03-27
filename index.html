@@ -3,36 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chavonne Fields — Mechanical Engineer</title>
+  <title>Chavonne Fields ‚Äî Mechanical Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --purple-50:  #faf5ff;
-      --purple-100: #f3e8ff;
-      --purple-200: #e9d5ff;
-      --purple-300: #d8b4fe;
-      --purple-400: #c084fc;
-      --purple-500: #a855f7;
-      --purple-600: #9333ea;
-      --purple-700: #7e22ce;
-      --sidebar-bg: #f0e8ff;
-      --border:     #e4d9f5;
-      --border-light: #ede9f8;
-      --text-primary:   #1a0a2e;
-      --text-secondary: #5a4a72;
-      --text-muted:     #9d8ab5;
-      --bg:     #faf8ff;
-      --surface: #fff;
+      /* Soft lavender palette ‚Äî inspired by the bottom of the Oliva branding image */
+      --lav-50:  #f5f2fb;
+      --lav-100: #ede8f7;
+      --lav-200: #ddd5ef;   /* sidebar bg ‚Äî the soft lavender from image */
+      --lav-300: #c9bde6;   /* borders */
+      --lav-400: #b3a3d8;   /* muted accents */
+      --lav-500: #9080b8;   /* the "Oliva" text muted purple */
+      --lav-600: #7060a0;   /* section labels, active states */
+      --lav-700: #513a7a;   /* headings, strong text */
+      --sidebar-bg:   #ddd5ef;
+      --border:       #c9bde6;
+      --border-light: #e4deef;
+      --text-primary:   #2e1f4a;
+      --text-secondary: #6b5c8a;
+      --text-muted:     #a699be;
+      --bg:      #f5f2fb;
+      --surface: #faf8ff;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-feature-settings: "kern" 1;
       background: var(--bg);
       color: var(--text-primary);
       display: flex;
@@ -40,7 +42,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ─── SIDEBAR ─── */
+    /* ‚îÄ‚îÄ‚îÄ SIDEBAR ‚îÄ‚îÄ‚îÄ */
     .sidebar {
       width: 290px;
       min-width: 290px;
@@ -58,12 +60,12 @@
 
     .sidebar::-webkit-scrollbar { width: 0; }
 
-    /* Profile photo placeholder — swap for <img> when ready */
+    /* Profile photo placeholder ‚Äî swap for <img> when ready */
     .profile-photo {
       width: 72px;
       height: 72px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--purple-400), var(--purple-600));
+      background: linear-gradient(135deg, var(--lav-300), var(--lav-600));
       display: flex;
       align-items: center;
       justify-content: center;
@@ -72,7 +74,7 @@
       color: #fff;
       letter-spacing: -1px;
       flex-shrink: 0;
-      box-shadow: 0 4px 16px rgba(147, 51, 234, 0.3);
+      box-shadow: 0 4px 16px rgba(112, 96, 160, 0.3);
     }
 
     .profile-photo img {
@@ -83,9 +85,10 @@
     }
 
     .name-block h1 {
-      font-size: 20px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
       font-weight: 700;
-      letter-spacing: -0.4px;
+      letter-spacing: 0px;
       color: var(--text-primary);
       line-height: 1.2;
       margin-bottom: 8px;
@@ -122,7 +125,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--purple-500);
+      color: var(--lav-500);
       margin-bottom: 10px;
     }
 
@@ -149,13 +152,13 @@
       transition: color 0.15s;
     }
 
-    .contact-list li a:hover { color: var(--purple-600); }
+    .contact-list li a:hover { color: var(--lav-600); }
 
     .c-icon {
       width: 15px;
       height: 15px;
       flex-shrink: 0;
-      color: var(--purple-400);
+      color: var(--lav-400);
     }
 
     /* Skills */
@@ -174,9 +177,9 @@
       font-size: 11.5px;
       padding: 3px 9px;
       border-radius: 20px;
-      border: 1px solid var(--purple-200);
-      color: var(--purple-700);
-      background: var(--purple-50);
+      border: 1px solid var(--lav-200);
+      color: var(--lav-700);
+      background: var(--lav-50);
       line-height: 1.5;
     }
 
@@ -189,14 +192,14 @@
     }
 
     .social-links a {
-      color: var(--purple-300);
+      color: var(--lav-300);
       transition: color 0.15s;
       display: flex;
     }
 
-    .social-links a:hover { color: var(--purple-600); }
+    .social-links a:hover { color: var(--lav-600); }
 
-    /* ─── MAIN ─── */
+    /* ‚îÄ‚îÄ‚îÄ MAIN ‚îÄ‚îÄ‚îÄ */
     .main {
       flex: 1;
       padding: 52px 64px 130px;
@@ -210,13 +213,13 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--purple-400);
+      color: var(--lav-400);
       margin-bottom: 22px;
     }
 
-    /* ─── INTRO ─── */
+    /* ‚îÄ‚îÄ‚îÄ INTRO ‚îÄ‚îÄ‚îÄ */
     .intro-card {
-      background: linear-gradient(135deg, var(--purple-50) 0%, #fff 60%);
+      background: linear-gradient(135deg, var(--lav-50) 0%, #fff 60%);
       border: 1px solid var(--border-light);
       border-radius: 20px;
       padding: 32px 36px;
@@ -232,11 +235,11 @@
     .intro-text + .intro-text { margin-top: 14px; }
 
     .intro-highlight {
-      color: var(--purple-600);
+      color: var(--lav-600);
       font-weight: 500;
     }
 
-    /* ─── PROJECT CARDS ─── */
+    /* ‚îÄ‚îÄ‚îÄ PROJECT CARDS ‚îÄ‚îÄ‚îÄ */
     .projects-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -253,9 +256,9 @@
     }
 
     .project-card:hover {
-      box-shadow: 0 12px 40px rgba(147, 51, 234, 0.1);
+      box-shadow: 0 12px 40px rgba(112, 96, 160, 0.1);
       transform: translateY(-3px);
-      border-color: var(--purple-200);
+      border-color: var(--lav-200);
     }
 
     .project-thumb {
@@ -271,7 +274,7 @@
 
     .thumb-keurig   { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
     .thumb-shark    { background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%); }
-    .thumb-teledyne { background: linear-gradient(135deg, var(--purple-100) 0%, var(--purple-200) 100%); }
+    .thumb-teledyne { background: linear-gradient(135deg, var(--lav-100) 0%, var(--lav-200) 100%); }
 
     .project-body { padding: 16px 18px 20px; }
 
@@ -297,7 +300,7 @@
       line-height: 1.65;
     }
 
-    /* ─── SERVICES ─── */
+    /* ‚îÄ‚îÄ‚îÄ SERVICES ‚îÄ‚îÄ‚îÄ */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -313,15 +316,15 @@
     }
 
     .service-card:hover {
-      border-color: var(--purple-300);
-      box-shadow: 0 4px 20px rgba(147, 51, 234, 0.07);
+      border-color: var(--lav-300);
+      box-shadow: 0 4px 20px rgba(112, 96, 160, 0.07);
     }
 
     .service-icon {
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      background: var(--purple-100);
+      background: var(--lav-100);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -342,7 +345,7 @@
       line-height: 1.65;
     }
 
-    /* ─── TIMELINE ─── */
+    /* ‚îÄ‚îÄ‚îÄ TIMELINE ‚îÄ‚îÄ‚îÄ */
     .timeline { display: flex; flex-direction: column; gap: 14px; }
 
     .timeline-item {
@@ -356,8 +359,8 @@
     }
 
     .timeline-item:hover {
-      border-color: var(--purple-200);
-      box-shadow: 0 4px 20px rgba(147, 51, 234, 0.07);
+      border-color: var(--lav-200);
+      box-shadow: 0 4px 20px rgba(112, 96, 160, 0.07);
     }
 
     .timeline-icon {
@@ -369,13 +372,14 @@
       align-items: center;
       justify-content: center;
       font-size: 20px;
-      background: var(--purple-100);
+      background: var(--lav-100);
     }
 
     .timeline-body { flex: 1; }
 
     .timeline-body h3 {
-      font-size: 15px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px;
       font-weight: 600;
       margin-bottom: 2px;
       color: var(--text-primary);
@@ -383,7 +387,7 @@
 
     .timeline-role {
       font-size: 12.5px;
-      color: var(--purple-500);
+      color: var(--lav-500);
       font-weight: 500;
       margin-bottom: 8px;
     }
@@ -422,10 +426,10 @@
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background: var(--purple-300);
+      background: var(--lav-300);
     }
 
-    /* ─── EDUCATION ─── */
+    /* ‚îÄ‚îÄ‚îÄ EDUCATION ‚îÄ‚îÄ‚îÄ */
     .edu-card {
       display: flex;
       gap: 16px;
@@ -439,7 +443,7 @@
       width: 42px;
       height: 42px;
       border-radius: 12px;
-      background: var(--purple-100);
+      background: var(--lav-100);
       flex-shrink: 0;
       display: flex;
       align-items: center;
@@ -467,11 +471,11 @@
       color: var(--text-muted);
     }
 
-    /* ─── CONTACT CTA ─── */
+    /* ‚îÄ‚îÄ‚îÄ CONTACT CTA ‚îÄ‚îÄ‚îÄ */
     .contact-cta {
       padding: 44px 40px;
       border-radius: 20px;
-      background: linear-gradient(135deg, var(--purple-600) 0%, var(--purple-500) 100%);
+      background: linear-gradient(135deg, #513a7a 0%, var(--lav-500) 100%);
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -500,7 +504,8 @@
     }
 
     .contact-cta h2 {
-      font-size: 24px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px;
       font-weight: 700;
       color: #fff;
       margin-bottom: 8px;
@@ -530,7 +535,7 @@
       align-items: center;
       gap: 6px;
       background: #fff;
-      color: var(--purple-700);
+      color: var(--lav-700);
       padding: 12px 26px;
       border-radius: 30px;
       text-decoration: none;
@@ -565,7 +570,7 @@
       background: rgba(255,255,255,0.08);
     }
 
-    /* ─── BOTTOM NAV ─── */
+    /* ‚îÄ‚îÄ‚îÄ BOTTOM NAV ‚îÄ‚îÄ‚îÄ */
     .bottom-nav {
       position: fixed;
       bottom: 24px;
@@ -579,7 +584,7 @@
       padding: 8px;
       display: flex;
       gap: 2px;
-      box-shadow: 0 8px 32px rgba(124, 58, 237, 0.12);
+      box-shadow: 0 8px 32px rgba(112, 96, 160, 0.12);
       z-index: 100;
     }
 
@@ -594,14 +599,14 @@
       white-space: nowrap;
     }
 
-    .bottom-nav a:hover { color: var(--purple-700); background: var(--purple-50); }
+    .bottom-nav a:hover { color: var(--lav-700); background: var(--lav-50); }
 
     .bottom-nav a.active {
-      color: var(--purple-700);
-      background: var(--purple-100);
+      color: var(--lav-700);
+      background: var(--lav-100);
     }
 
-    /* ─── RESPONSIVE ─── */
+    /* ‚îÄ‚îÄ‚îÄ RESPONSIVE ‚îÄ‚îÄ‚îÄ */
     @media (max-width: 980px) {
       body { flex-direction: column; }
       .sidebar {
@@ -627,7 +632,7 @@
 </head>
 <body>
 
-  <!-- ─── SIDEBAR ─── -->
+  <!-- ‚îÄ‚îÄ‚îÄ SIDEBAR ‚îÄ‚îÄ‚îÄ -->
   <aside class="sidebar">
 
     <!-- Replace inner content with <img src="..." alt="Chavonne Fields"> when you have your photo -->
@@ -724,7 +729,7 @@
 
   </aside>
 
-  <!-- ─── MAIN ─── -->
+  <!-- ‚îÄ‚îÄ‚îÄ MAIN ‚îÄ‚îÄ‚îÄ -->
   <main class="main">
 
     <!-- INTRO -->
@@ -732,7 +737,7 @@
       <div class="section-label">Intro</div>
       <div class="intro-card">
         <p class="intro-text">
-          I'm <span class="intro-highlight">Chavonne Fields</span>, a mechanical engineering student at Northeastern University with co-op experience at <span class="intro-highlight">Keurig Dr Pepper</span>, <span class="intro-highlight">SharkNinja</span>, and <span class="intro-highlight">Teledyne FLIR</span>. I specialize in consumer product R&amp;D — from rapid prototyping and CAD to design verification and failure analysis.
+          I'm <span class="intro-highlight">Chavonne Fields</span>, a mechanical engineering student at Northeastern University with co-op experience at <span class="intro-highlight">Keurig Dr Pepper</span>, <span class="intro-highlight">SharkNinja</span>, and <span class="intro-highlight">Teledyne FLIR</span>. I specialize in consumer product R&amp;D ‚Äî from rapid prototyping and CAD to design verification and failure analysis.
         </p>
         <p class="intro-text">
           I'm energized by problems that sit at the intersection of hardware and rigor: building the test that proves something works, digging into why it failed, and iterating until the design is right. I'm actively seeking full-time mechanical engineering roles.
@@ -746,38 +751,38 @@
       <div class="projects-grid">
 
         <div class="project-card">
-          <div class="project-thumb thumb-keurig">☕</div>
+          <div class="project-thumb thumb-keurig">‚òï</div>
           <div class="project-body">
             <div class="project-meta">
-              <span>📅 Jul – Dec 2025</span>
-              <span>📍 Burlington, MA</span>
+              <span>üìÖ Jul ‚Äì Dec 2025</span>
+              <span>üìç Burlington, MA</span>
             </div>
-            <h3>High-Pressure Validation — Keurig Dr Pepper</h3>
+            <h3>High-Pressure Validation ‚Äî Keurig Dr Pepper</h3>
             <p>DV &amp; reliability testing on consumer electromechanical assemblies, failure analysis on high-pressure seal systems, tolerance stack-ups, and authored cross-functional validation reports.</p>
           </div>
         </div>
 
         <div class="project-card">
-          <div class="project-thumb thumb-shark">🦈</div>
+          <div class="project-thumb thumb-shark">ü¶à</div>
           <div class="project-body">
             <div class="project-meta">
-              <span>📅 Jun 2023 – Aug 2024</span>
-              <span>📍 Needham, MA</span>
+              <span>üìÖ Jun 2023 ‚Äì Aug 2024</span>
+              <span>üìç Needham, MA</span>
             </div>
-            <h3>Next-Gen Carpet Extractor R&amp;D — SharkNinja</h3>
+            <h3>Next-Gen Carpet Extractor R&amp;D ‚Äî SharkNinja</h3>
             <p>Led DoE for Shark's next-gen carpet extractor, developed &amp; prototyped mechanical systems in SolidWorks and 3D printing, and performed root cause analysis and competitor benchmarking.</p>
           </div>
         </div>
 
         <div class="project-card">
-          <div class="project-thumb thumb-teledyne">🔭</div>
+          <div class="project-thumb thumb-teledyne">üî≠</div>
           <div class="project-body">
             <div class="project-meta">
-              <span>📅 Jul – Dec 2022</span>
-              <span>📍 Billerica, MA</span>
+              <span>üìÖ Jul ‚Äì Dec 2022</span>
+              <span>üìç Billerica, MA</span>
             </div>
-            <h3>Raspberry Pi Spectrometer — Teledyne FLIR</h3>
-            <p>Designed and assembled a full-stack Raspberry Pi spectrometer prototype — integrating mechanical, electrical, and software subsystems from concept to functional unit.</p>
+            <h3>Raspberry Pi Spectrometer ‚Äî Teledyne FLIR</h3>
+            <p>Designed and assembled a full-stack Raspberry Pi spectrometer prototype ‚Äî integrating mechanical, electrical, and software subsystems from concept to functional unit.</p>
           </div>
         </div>
 
@@ -789,32 +794,32 @@
       <div class="section-label">What I Do</div>
       <div class="services-grid">
         <div class="service-card">
-          <div class="service-icon">🔬</div>
+          <div class="service-icon">üî¨</div>
           <h3>Validation &amp; Testing</h3>
           <p>DV/reliability testing, DoE, instrumentation, pressure/flow testing, and data-backed go/no-go decisions.</p>
         </div>
         <div class="service-card">
-          <div class="service-icon">🖨️</div>
+          <div class="service-icon">üñ®Ô∏è</div>
           <h3>Rapid Prototyping</h3>
           <p>FDM &amp; SLA 3D printing, CNC milling, laser cutting, fixture builds, and functional electromechanical assemblies.</p>
         </div>
         <div class="service-card">
-          <div class="service-icon">📐</div>
+          <div class="service-icon">üìê</div>
           <h3>CAD &amp; DFM</h3>
           <p>SolidWorks, Fusion 360, tolerance stack-ups, GD&amp;T reviews, and design-for-manufacturability feedback.</p>
         </div>
         <div class="service-card">
-          <div class="service-icon">🔍</div>
+          <div class="service-icon">üîç</div>
           <h3>Failure Analysis</h3>
           <p>Structured teardown, root cause analysis, corrective design updates, and failure trend documentation.</p>
         </div>
         <div class="service-card">
-          <div class="service-icon">📝</div>
+          <div class="service-icon">üìù</div>
           <h3>Documentation</h3>
           <p>Test plans, validation reports, requirement traceability, process documentation, and engineering change records.</p>
         </div>
         <div class="service-card">
-          <div class="service-icon">💻</div>
+          <div class="service-icon">üíª</div>
           <h3>Programming</h3>
           <p>Python and MATLAB for data analysis, test automation, and rapid iteration on experimental results.</p>
         </div>
@@ -827,13 +832,13 @@
       <div class="timeline">
 
         <div class="timeline-item">
-          <div class="timeline-icon">☕</div>
+          <div class="timeline-icon">‚òï</div>
           <div class="timeline-body">
             <h3>Keurig Dr Pepper Co.</h3>
             <div class="timeline-role">Mechanical Engineering Co-op</div>
             <div class="timeline-meta">
-              <span>📅 Jul 2025 – Dec 2025</span>
-              <span>📍 Burlington, MA</span>
+              <span>üìÖ Jul 2025 ‚Äì Dec 2025</span>
+              <span>üìç Burlington, MA</span>
             </div>
             <ul class="timeline-bullets">
               <li>Fabricated and prepared test samples for DV and reliability testing on consumer electromechanical assemblies with full documentation traceability.</li>
@@ -845,13 +850,13 @@
         </div>
 
         <div class="timeline-item">
-          <div class="timeline-icon">🦈</div>
+          <div class="timeline-icon">ü¶à</div>
           <div class="timeline-body">
             <h3>SharkNinja LLC</h3>
-            <div class="timeline-role">Mechanical Engineering Co-op — Shark R&amp;D</div>
+            <div class="timeline-role">Mechanical Engineering Co-op ‚Äî Shark R&amp;D</div>
             <div class="timeline-meta">
-              <span>📅 Jun 2023 – Aug 2024</span>
-              <span>📍 Needham, MA</span>
+              <span>üìÖ Jun 2023 ‚Äì Aug 2024</span>
+              <span>üìç Needham, MA</span>
             </div>
             <ul class="timeline-bullets">
               <li>Implemented comprehensive DoE to identify system performance levers for Shark's next-gen carpet extractor; communicated results to drive data-informed decisions.</li>
@@ -863,16 +868,16 @@
         </div>
 
         <div class="timeline-item">
-          <div class="timeline-icon">🔭</div>
+          <div class="timeline-icon">üî≠</div>
           <div class="timeline-body">
             <h3>Teledyne FLIR Systems Inc.</h3>
             <div class="timeline-role">Systems Engineering Co-op</div>
             <div class="timeline-meta">
-              <span>📅 Jul 2022 – Dec 2022</span>
-              <span>📍 Billerica, MA</span>
+              <span>üìÖ Jul 2022 ‚Äì Dec 2022</span>
+              <span>üìç Billerica, MA</span>
             </div>
             <ul class="timeline-bullets">
-              <li>Designed and assembled a Raspberry Pi spectrometer prototype integrating mechanical, electrical, and software subsystems — concept to functional unit.</li>
+              <li>Designed and assembled a Raspberry Pi spectrometer prototype integrating mechanical, electrical, and software subsystems ‚Äî concept to functional unit.</li>
               <li>Conducted continuous operation and reliability testing of robotic electromechanical systems; flagged anomalies for failure analysis.</li>
               <li>Authored system-level requirements documentation and traceability records in a regulated engineering environment.</li>
             </ul>
@@ -886,12 +891,12 @@
     <section class="content-section" id="education">
       <div class="section-label">Education</div>
       <div class="edu-card">
-        <div class="edu-icon">🎓</div>
+        <div class="edu-icon">üéì</div>
         <div class="edu-body">
           <h3>Northeastern University</h3>
-          <div class="degree">BS in Mechanical Engineering — in progress</div>
+          <div class="degree">BS in Mechanical Engineering ‚Äî in progress</div>
           <div class="edu-meta">
-            <span>📍 Boston, MA</span>
+            <span>üìç Boston, MA</span>
           </div>
         </div>
       </div>
@@ -904,7 +909,7 @@
         <h2>Let's work together</h2>
         <p>I'm actively looking for full-time mechanical engineering opportunities. Let's talk.</p>
         <div class="cta-buttons">
-          <a href="mailto:chavonnefields11@gmail.com" class="btn-white">Get in touch →</a>
+          <a href="mailto:chavonnefields11@gmail.com" class="btn-white">Get in touch ‚Üí</a>
           <a href="https://linkedin.com/in/chavonne-fields" target="_blank" class="btn-outline-white">View LinkedIn</a>
         </div>
       </div>
@@ -912,7 +917,7 @@
 
   </main>
 
-  <!-- ─── BOTTOM NAV ─── -->
+  <!-- ‚îÄ‚îÄ‚îÄ BOTTOM NAV ‚îÄ‚îÄ‚îÄ -->
   <nav class="bottom-nav">
     <a href="#intro" class="active">Intro</a>
     <a href="#projects">Projects</a>
