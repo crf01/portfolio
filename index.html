@@ -1,948 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chavonne Fields ‚Äî Mechanical Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      /* Soft lavender palette ‚Äî inspired by the bottom of the Oliva branding image */
-      --lav-50:  #f5f2fb;
-      --lav-100: #ede8f7;
-      --lav-200: #ddd5ef;   /* sidebar bg ‚Äî the soft lavender from image */
-      --lav-300: #c9bde6;   /* borders */
-      --lav-400: #b3a3d8;   /* muted accents */
-      --lav-500: #9080b8;   /* the "Oliva" text muted purple */
-      --lav-600: #7060a0;   /* section labels, active states */
-      --lav-700: #513a7a;   /* headings, strong text */
-      --sidebar-bg:   #ddd5ef;
-      --border:       #c9bde6;
-      --border-light: #e4deef;
-      --text-primary:   #2e1f4a;
-      --text-secondary: #6b5c8a;
-      --text-muted:     #a699be;
-      --bg:      #f5f2fb;
-      --surface: #faf8ff;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      font-feature-settings: "kern" 1;
-      background: var(--bg);
-      color: var(--text-primary);
-      display: flex;
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ‚îÄ‚îÄ‚îÄ SIDEBAR ‚îÄ‚îÄ‚îÄ */
-    .sidebar {
-      width: 290px;
-      min-width: 290px;
-      height: 100vh;
-      position: sticky;
-      top: 0;
-      overflow-y: auto;
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--border);
-      padding: 36px 24px 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-    }
-
-    .sidebar::-webkit-scrollbar { width: 0; }
-
-    /* Profile photo placeholder ‚Äî swap for <img> when ready */
-    .profile-photo {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--lav-300), var(--lav-600));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      font-weight: 700;
-      color: #fff;
-      letter-spacing: -1px;
-      flex-shrink: 0;
-      box-shadow: 0 4px 16px rgba(112, 96, 160, 0.3);
-    }
-
-    .profile-photo img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .name-block h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 0px;
-      color: var(--text-primary);
-      line-height: 1.2;
-      margin-bottom: 8px;
-    }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 500;
-      color: #16a34a;
-      background: #dcfce7;
-      padding: 4px 10px;
-      border-radius: 20px;
-    }
-
-    .status-badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #16a34a;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(0.85); }
-    }
-
-    .sidebar-label {
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--lav-500);
-      margin-bottom: 10px;
-    }
-
-    .about-text {
-      font-size: 13px;
-      line-height: 1.75;
-      color: var(--text-secondary);
-    }
-
-    /* Contact */
-    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-
-    .contact-list li {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      font-size: 12.5px;
-      color: var(--text-secondary);
-    }
-
-    .contact-list li a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .contact-list li a:hover { color: var(--lav-600); }
-
-    .c-icon {
-      width: 15px;
-      height: 15px;
-      flex-shrink: 0;
-      color: var(--lav-400);
-    }
-
-    /* Skills */
-    .skill-group { margin-bottom: 14px; }
-
-    .skill-group-label {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--text-muted);
-      margin-bottom: 7px;
-    }
-
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
-
-    .skill-tag {
-      font-size: 11.5px;
-      padding: 3px 9px;
-      border-radius: 20px;
-      border: 1px solid var(--lav-200);
-      color: var(--lav-700);
-      background: var(--lav-50);
-      line-height: 1.5;
-    }
-
-    /* Social */
-    .social-links {
-      display: flex;
-      gap: 12px;
-      margin-top: auto;
-      padding-top: 4px;
-    }
-
-    .social-links a {
-      color: var(--lav-300);
-      transition: color 0.15s;
-      display: flex;
-    }
-
-    .social-links a:hover { color: var(--lav-600); }
-
-    /* ‚îÄ‚îÄ‚îÄ MAIN ‚îÄ‚îÄ‚îÄ */
-    .main {
-      flex: 1;
-      padding: 52px 64px 130px;
-      max-width: 880px;
-    }
-
-    .content-section { margin-bottom: 64px; }
-
-    .section-label {
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--lav-400);
-      margin-bottom: 22px;
-    }
-
-    /* ‚îÄ‚îÄ‚îÄ INTRO ‚îÄ‚îÄ‚îÄ */
-    .intro-card {
-      background: linear-gradient(135deg, var(--lav-50) 0%, #fff 60%);
-      border: 1px solid var(--border-light);
-      border-radius: 20px;
-      padding: 32px 36px;
-    }
-
-    .intro-text {
-      font-size: 15px;
-      line-height: 1.85;
-      color: var(--text-secondary);
-      max-width: 640px;
-    }
-
-    .intro-text + .intro-text { margin-top: 14px; }
-
-    .intro-highlight {
-      color: var(--lav-600);
-      font-weight: 500;
-    }
-
-    /* ‚îÄ‚îÄ‚îÄ PROJECT CARDS ‚îÄ‚îÄ‚îÄ */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .project-card {
-      border: 1px solid var(--border-light);
-      border-radius: 18px;
-      overflow: hidden;
-      background: var(--surface);
-      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
-      cursor: default;
-    }
-
-    .project-card:hover {
-      box-shadow: 0 12px 40px rgba(112, 96, 160, 0.1);
-      transform: translateY(-3px);
-      border-color: var(--lav-200);
-    }
-
-    .project-thumb {
-      width: 100%;
-      height: 155px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 42px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .thumb-keurig   { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
-    .thumb-shark    { background: linear-gradient(135deg, #cffafe 0%, #a5f3fc 100%); }
-    .thumb-teledyne { background: linear-gradient(135deg, var(--lav-100) 0%, var(--lav-200) 100%); }
-
-    .project-body { padding: 16px 18px 20px; }
-
-    .project-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 8px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .project-card h3 {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 7px;
-      color: var(--text-primary);
-    }
-
-    .project-card p {
-      font-size: 12.5px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    /* ‚îÄ‚îÄ‚îÄ SERVICES ‚îÄ‚îÄ‚îÄ */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .service-card {
-      padding: 22px 20px;
-      border: 1px solid var(--border-light);
-      border-radius: 16px;
-      background: var(--surface);
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .service-card:hover {
-      border-color: var(--lav-300);
-      box-shadow: 0 4px 20px rgba(112, 96, 160, 0.07);
-    }
-
-    .service-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--lav-100);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      margin-bottom: 13px;
-    }
-
-    .service-card h3 {
-      font-size: 13.5px;
-      font-weight: 600;
-      margin-bottom: 7px;
-      color: var(--text-primary);
-    }
-
-    .service-card p {
-      font-size: 12.5px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    /* ‚îÄ‚îÄ‚îÄ TIMELINE ‚îÄ‚îÄ‚îÄ */
-    .timeline { display: flex; flex-direction: column; gap: 14px; }
-
-    .timeline-item {
-      display: flex;
-      gap: 16px;
-      padding: 22px;
-      border: 1px solid var(--border-light);
-      border-radius: 16px;
-      background: var(--surface);
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .timeline-item:hover {
-      border-color: var(--lav-200);
-      box-shadow: 0 4px 20px rgba(112, 96, 160, 0.07);
-    }
-
-    .timeline-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      background: var(--lav-100);
-    }
-
-    .timeline-body { flex: 1; }
-
-    .timeline-body h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 2px;
-      color: var(--text-primary);
-    }
-
-    .timeline-role {
-      font-size: 12.5px;
-      color: var(--lav-500);
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-
-    .timeline-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 12px;
-      font-size: 11.5px;
-      color: var(--text-muted);
-    }
-
-    .timeline-meta span { display: flex; align-items: center; gap: 4px; }
-
-    .timeline-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-
-    .timeline-bullets li {
-      font-size: 12.5px;
-      color: var(--text-secondary);
-      line-height: 1.65;
-      padding-left: 14px;
-      position: relative;
-    }
-
-    .timeline-bullets li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 8px;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--lav-300);
-    }
-
-    /* ‚îÄ‚îÄ‚îÄ EDUCATION ‚îÄ‚îÄ‚îÄ */
-    .edu-card {
-      display: flex;
-      gap: 16px;
-      padding: 22px;
-      border: 1px solid var(--border-light);
-      border-radius: 16px;
-      background: var(--surface);
-    }
-
-    .edu-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background: var(--lav-100);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-    }
-
-    .edu-body h3 {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 3px;
-      color: var(--text-primary);
-    }
-
-    .edu-body .degree {
-      font-size: 13px;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-    }
-
-    .edu-meta {
-      display: flex;
-      gap: 14px;
-      font-size: 11.5px;
-      color: var(--text-muted);
-    }
-
-    /* ‚îÄ‚îÄ‚îÄ CONTACT CTA ‚îÄ‚îÄ‚îÄ */
-    .contact-cta {
-      padding: 44px 40px;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #513a7a 0%, var(--lav-500) 100%);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .contact-cta::before {
-      content: '';
-      position: absolute;
-      top: -60px;
-      right: -60px;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.06);
-    }
-
-    .contact-cta::after {
-      content: '';
-      position: absolute;
-      bottom: -40px;
-      left: -40px;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-    }
-
-    .contact-cta h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .contact-cta p {
-      color: rgba(255,255,255,0.75);
-      font-size: 14px;
-      margin-bottom: 28px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-    }
-
-    .btn-white {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #fff;
-      color: var(--lav-700);
-      padding: 12px 26px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-size: 13.5px;
-      font-weight: 600;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    }
-
-    .btn-white:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.16);
-    }
-
-    .btn-outline-white {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: transparent;
-      color: #fff;
-      padding: 12px 26px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-size: 13.5px;
-      font-weight: 500;
-      border: 1.5px solid rgba(255,255,255,0.4);
-      transition: border-color 0.15s, background 0.15s;
-    }
-
-    .btn-outline-white:hover {
-      border-color: rgba(255,255,255,0.8);
-      background: rgba(255,255,255,0.08);
-    }
-
-    /* ‚îÄ‚îÄ‚îÄ BOTTOM NAV ‚îÄ‚îÄ‚îÄ */
-    .bottom-nav {
-      position: fixed;
-      bottom: 24px;
-      left: calc(290px + (100vw - 290px) / 2);
-      transform: translateX(-50%);
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border-light);
-      border-radius: 50px;
-      padding: 8px;
-      display: flex;
-      gap: 2px;
-      box-shadow: 0 8px 32px rgba(112, 96, 160, 0.12);
-      z-index: 100;
-    }
-
-    .bottom-nav a {
-      font-size: 12.5px;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 7px 14px;
-      border-radius: 30px;
-      transition: all 0.15s;
-      white-space: nowrap;
-    }
-
-    .bottom-nav a:hover { color: var(--lav-700); background: var(--lav-50); }
-
-    .bottom-nav a.active {
-      color: var(--lav-700);
-      background: var(--lav-100);
-    }
-
-    /* ‚îÄ‚îÄ‚îÄ RESPONSIVE ‚îÄ‚îÄ‚îÄ */
-    @media (max-width: 980px) {
-      body { flex-direction: column; }
-      .sidebar {
-        width: 100%;
-        min-width: unset;
-        height: auto;
-        position: static;
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-      }
-      .main { padding: 36px 28px 110px; max-width: 100%; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .services-grid { grid-template-columns: 1fr 1fr; }
-      .bottom-nav { left: 50%; transform: translateX(-50%); }
-    }
-
-    @media (max-width: 580px) {
-      .services-grid { grid-template-columns: 1fr; }
-      .main { padding: 28px 18px 110px; }
-      .contact-cta { padding: 32px 24px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chavonne Fields — Mechanical Engineer</title>
+<meta name="description" content="Chavonne Fields is a mechanical engineer specializing in consumer products, prototyping, and turning test data into design decisions that ship.">
+<meta name="theme-color" content="#B5A5D1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="page">
 
-  <!-- ‚îÄ‚îÄ‚îÄ SIDEBAR ‚îÄ‚îÄ‚îÄ -->
-  <aside class="sidebar">
-
-    <!-- Replace inner content with <img src="..." alt="Chavonne Fields"> when you have your photo -->
-    <div class="profile-photo">CF</div>
-
-    <div class="name-block">
-      <h1>Chavonne Fields</h1>
-      <span class="status-badge">available for work</span>
+  <nav class="nav" id="nav">
+    <a href="index.html#top" class="logo"><span class="dot"></span><span>Chavonne Fields</span></a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#">Resume</a>
+      <a href="mailto:chavonnefields11@gmail.com" class="nav-cta">Contact →</a>
     </div>
-
-    <div>
-      <div class="sidebar-label">About</div>
-      <p class="about-text">Boston-based mechanical engineer at Northeastern. Specialized in consumer product R&amp;D, rapid prototyping, and test &amp; validation across three engineering co-ops.</p>
-    </div>
-
-    <div>
-      <div class="sidebar-label">Contact</div>
-      <ul class="contact-list">
-        <li>
-          <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-          <a href="mailto:chavonnefields11@gmail.com">chavonnefields11@gmail.com</a>
-        </li>
-        <li>
-          <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.79a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          (318) 792-9706
-        </li>
-        <li>
-          <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Boston, MA
-        </li>
-        <li>
-          <svg class="c-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          <a href="https://linkedin.com/in/chavonne-fields" target="_blank">linkedin.com/in/chavonne-fields</a>
-        </li>
-      </ul>
-    </div>
-
-    <div>
-      <div class="sidebar-label">Skills</div>
-
-      <div class="skill-group">
-        <div class="skill-group-label">CAD &amp; Modeling</div>
-        <div class="skill-tags">
-          <span class="skill-tag">SolidWorks (CSWA)</span>
-          <span class="skill-tag">Fusion 360</span>
-          <span class="skill-tag">PTC Creo</span>
-          <span class="skill-tag">Onshape</span>
-          <span class="skill-tag">AutoCAD</span>
-          <span class="skill-tag">GD&amp;T</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-label">Fabrication</div>
-        <div class="skill-tags">
-          <span class="skill-tag">FDM 3D Printing</span>
-          <span class="skill-tag">SLA 3D Printing</span>
-          <span class="skill-tag">CNC Milling</span>
-          <span class="skill-tag">Laser Cutting</span>
-          <span class="skill-tag">Hand Soldering</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-label">Test &amp; Validation</div>
-        <div class="skill-tags">
-          <span class="skill-tag">DoE</span>
-          <span class="skill-tag">DV Testing</span>
-          <span class="skill-tag">Root Cause Analysis</span>
-          <span class="skill-tag">Failure Analysis</span>
-          <span class="skill-tag">Data Acquisition</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <div class="skill-group-label">Programming</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">MATLAB</span>
-          <span class="skill-tag">C++</span>
-          <span class="skill-tag">Arduino</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="social-links">
-      <a href="https://linkedin.com/in/chavonne-fields" target="_blank" title="LinkedIn">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
-      <a href="mailto:chavonnefields11@gmail.com" title="Email">
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-      </a>
-    </div>
-
-  </aside>
-
-  <!-- ‚îÄ‚îÄ‚îÄ MAIN ‚îÄ‚îÄ‚îÄ -->
-  <main class="main">
-
-    <!-- INTRO -->
-    <section class="content-section" id="intro">
-      <div class="section-label">Intro</div>
-      <div class="intro-card">
-        <p class="intro-text">
-          I'm <span class="intro-highlight">Chavonne Fields</span>, a mechanical engineering student at Northeastern University with co-op experience at <span class="intro-highlight">Keurig Dr Pepper</span>, <span class="intro-highlight">SharkNinja</span>, and <span class="intro-highlight">Teledyne FLIR</span>. I specialize in consumer product R&amp;D ‚Äî from rapid prototyping and CAD to design verification and failure analysis.
-        </p>
-        <p class="intro-text">
-          I'm energized by problems that sit at the intersection of hardware and rigor: building the test that proves something works, digging into why it failed, and iterating until the design is right. I'm actively seeking full-time mechanical engineering roles.
-        </p>
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section class="content-section" id="projects">
-      <div class="section-label">Projects &amp; Work</div>
-      <div class="projects-grid">
-
-        <div class="project-card">
-          <div class="project-thumb thumb-keurig">‚òï</div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>üìÖ Jul ‚Äì Dec 2025</span>
-              <span>üìç Burlington, MA</span>
-            </div>
-            <h3>High-Pressure Validation ‚Äî Keurig Dr Pepper</h3>
-            <p>DV &amp; reliability testing on consumer electromechanical assemblies, failure analysis on high-pressure seal systems, tolerance stack-ups, and authored cross-functional validation reports.</p>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-thumb thumb-shark">ü¶à</div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>üìÖ Jun 2023 ‚Äì Aug 2024</span>
-              <span>üìç Needham, MA</span>
-            </div>
-            <h3>Next-Gen Carpet Extractor R&amp;D ‚Äî SharkNinja</h3>
-            <p>Led DoE for Shark's next-gen carpet extractor, developed &amp; prototyped mechanical systems in SolidWorks and 3D printing, and performed root cause analysis and competitor benchmarking.</p>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-thumb thumb-teledyne">üî≠</div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>üìÖ Jul ‚Äì Dec 2022</span>
-              <span>üìç Billerica, MA</span>
-            </div>
-            <h3>Raspberry Pi Spectrometer ‚Äî Teledyne FLIR</h3>
-            <p>Designed and assembled a full-stack Raspberry Pi spectrometer prototype ‚Äî integrating mechanical, electrical, and software subsystems from concept to functional unit.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- WHAT I DO -->
-    <section class="content-section" id="services">
-      <div class="section-label">What I Do</div>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">üî¨</div>
-          <h3>Validation &amp; Testing</h3>
-          <p>DV/reliability testing, DoE, instrumentation, pressure/flow testing, and data-backed go/no-go decisions.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">üñ®Ô∏è</div>
-          <h3>Rapid Prototyping</h3>
-          <p>FDM &amp; SLA 3D printing, CNC milling, laser cutting, fixture builds, and functional electromechanical assemblies.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">üìê</div>
-          <h3>CAD &amp; DFM</h3>
-          <p>SolidWorks, Fusion 360, tolerance stack-ups, GD&amp;T reviews, and design-for-manufacturability feedback.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">üîç</div>
-          <h3>Failure Analysis</h3>
-          <p>Structured teardown, root cause analysis, corrective design updates, and failure trend documentation.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">üìù</div>
-          <h3>Documentation</h3>
-          <p>Test plans, validation reports, requirement traceability, process documentation, and engineering change records.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">üíª</div>
-          <h3>Programming</h3>
-          <p>Python and MATLAB for data analysis, test automation, and rapid iteration on experimental results.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- EXPERIENCE -->
-    <section class="content-section" id="experience">
-      <div class="section-label">Experience</div>
-      <div class="timeline">
-
-        <div class="timeline-item">
-          <div class="timeline-icon">‚òï</div>
-          <div class="timeline-body">
-            <h3>Keurig Dr Pepper Co.</h3>
-            <div class="timeline-role">Mechanical Engineering Co-op</div>
-            <div class="timeline-meta">
-              <span>üìÖ Jul 2025 ‚Äì Dec 2025</span>
-              <span>üìç Burlington, MA</span>
-            </div>
-            <ul class="timeline-bullets">
-              <li>Fabricated and prepared test samples for DV and reliability testing on consumer electromechanical assemblies with full documentation traceability.</li>
-              <li>Performed failure analysis on prototype assemblies and high-pressure seal systems via structured teardown; implemented corrective design updates for next-iteration builds.</li>
-              <li>Performed tolerance stack-ups and GD&amp;T compliance reviews of supplier drawings to support design-to-manufacture handoffs.</li>
-              <li>Authored validation reports summarizing reliability data, failure trends, and requirement alignment for cross-functional review.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-icon">ü¶à</div>
-          <div class="timeline-body">
-            <h3>SharkNinja LLC</h3>
-            <div class="timeline-role">Mechanical Engineering Co-op ‚Äî Shark R&amp;D</div>
-            <div class="timeline-meta">
-              <span>üìÖ Jun 2023 ‚Äì Aug 2024</span>
-              <span>üìç Needham, MA</span>
-            </div>
-            <ul class="timeline-bullets">
-              <li>Implemented comprehensive DoE to identify system performance levers for Shark's next-gen carpet extractor; communicated results to drive data-informed decisions.</li>
-              <li>Developed and prototyped mechanical systems using SolidWorks, 3D printing, and machining, increasing prototype testing efficiency.</li>
-              <li>Performed root cause analysis on prototypes, identifying and resolving critical issues.</li>
-              <li>Analyzed and benchmarked competitor units, documenting specs to identify key performance gaps.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-icon">üî≠</div>
-          <div class="timeline-body">
-            <h3>Teledyne FLIR Systems Inc.</h3>
-            <div class="timeline-role">Systems Engineering Co-op</div>
-            <div class="timeline-meta">
-              <span>üìÖ Jul 2022 ‚Äì Dec 2022</span>
-              <span>üìç Billerica, MA</span>
-            </div>
-            <ul class="timeline-bullets">
-              <li>Designed and assembled a Raspberry Pi spectrometer prototype integrating mechanical, electrical, and software subsystems ‚Äî concept to functional unit.</li>
-              <li>Conducted continuous operation and reliability testing of robotic electromechanical systems; flagged anomalies for failure analysis.</li>
-              <li>Authored system-level requirements documentation and traceability records in a regulated engineering environment.</li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- EDUCATION -->
-    <section class="content-section" id="education">
-      <div class="section-label">Education</div>
-      <div class="edu-card">
-        <div class="edu-icon">üéì</div>
-        <div class="edu-body">
-          <h3>Northeastern University</h3>
-          <div class="degree">BS in Mechanical Engineering ‚Äî in progress</div>
-          <div class="edu-meta">
-            <span>üìç Boston, MA</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="content-section" id="contact">
-      <div class="section-label">Contact</div>
-      <div class="contact-cta">
-        <h2>Let's work together</h2>
-        <p>I'm actively looking for full-time mechanical engineering opportunities. Let's talk.</p>
-        <div class="cta-buttons">
-          <a href="mailto:chavonnefields11@gmail.com" class="btn-white">Get in touch ‚Üí</a>
-          <a href="https://linkedin.com/in/chavonne-fields" target="_blank" class="btn-outline-white">View LinkedIn</a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ‚îÄ‚îÄ‚îÄ BOTTOM NAV ‚îÄ‚îÄ‚îÄ -->
-  <nav class="bottom-nav">
-    <a href="#intro" class="active">Intro</a>
-    <a href="#projects">Projects</a>
-    <a href="#services">Services</a>
-    <a href="#experience">Experience</a>
-    <a href="#education">Education</a>
-    <a href="#contact">Contact</a>
   </nav>
 
-  <script>
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.bottom-nav a');
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="status"><span class="d"></span> Available 2026 · Open to freelance</div>
+        <h1>Bringing <em>consumer products</em> from concept to reality.</h1>
+        <p class="hero-sub">I'm a <strong>mechanical engineer</strong> who lives in the messy middle — prototyping, testing, and turning test data into design decisions that ship.</p>
+        <div class="cta-row">
+          <a href="#" class="btn btn-primary">View Resume ↓</a>
+          <a href="#projects" class="btn btn-ghost">See Projects →</a>
+        </div>
+        <div class="meta">
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:chavonnefields11@gmail.com">chavonnefields11@gmail.com</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="portrait">[ add your headshot ]</div>
+      </div>
+    </div>
+  </section>
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.forEach(l => l.classList.remove('active'));
-          const active = document.querySelector(`.bottom-nav a[href="#${entry.target.id}"]`);
-          if (active) active.classList.add('active');
-        }
-      });
-    }, { rootMargin: '-40% 0px -55% 0px' });
+  <div class="skills-strip">
+    <div class="skill-label">Toolbox</div>
+    <div class="skill-pill">Fusion 360</div>
+    <div class="skill-pill">SolidWorks</div>
+    <div class="skill-pill">3D Printing</div>
+    <div class="skill-pill">GD&amp;T</div>
+    <div class="skill-pill">DFM</div>
+    <div class="skill-pill">Tolerance Analysis</div>
+    <div class="skill-pill">Prototyping</div>
+    <div class="skill-pill">Test Rig Design</div>
+    <div class="skill-pill">Python</div>
+  </div>
 
-    sections.forEach(s => observer.observe(s));
-  </script>
+  <section class="about" id="about">
+    <div class="about-left">
+      <div class="section-label">About</div>
+      <h2>A mechanical engineer with <em>good taste</em>.</h2>
+    </div>
+    <div class="about-right">
+      <p>I studied mechanical engineering because I love the moment a sketch turns into something you can hold. These days I specialize in <strong>prototyping and validation</strong> — the part where ideas get punched in the face by physics and either hold up or get redesigned.</p>
+      <p>I'm happiest with a caliper in one hand and a test plan in the other. Outside of CAD, you'll find me tinkering with 3D-printed gifts for friends and over-engineering my houseplants' watering schedule.</p>
+    </div>
+  </section>
 
+  <section class="projects" id="projects">
+    <div class="projects-header">
+      <h2>Selected <em>projects</em>.</h2>
+      <div class="projects-count">02 — Updated April 2026</div>
+    </div>
+    <div class="project-grid">
+      <a href="cogsworth.html" class="project-card">
+        <div class="card-image cog">
+          <span class="year-pill">2025</span>
+          [ Cogsworth render ]
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div class="card-title">Cogsworth Clock</div>
+            <div class="arrow-circle">→</div>
+          </div>
+          <div class="card-desc">A character CAD study translating a beloved animated clock into a printable 3D model — fabrication constraints drove every design decision.</div>
+          <div class="tag-row">
+            <span class="tag">Fusion 360</span>
+            <span class="tag rose">3D Printing</span>
+            <span class="tag peach">Assembly</span>
+          </div>
+        </div>
+      </a>
+      <a href="screwdriver.html" class="project-card">
+        <div class="card-image sd">
+          <span class="year-pill">2024</span>
+          [ Screwdriver photo ]
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div class="card-title">Electric Screwdriver</div>
+            <div class="arrow-circle">→</div>
+          </div>
+          <div class="card-desc">A teardown-to-redesign case study on a consumer power tool — focused on torque behavior, grip ergonomics, and DFM improvements.</div>
+          <div class="tag-row">
+            <span class="tag">SolidWorks</span>
+            <span class="tag sage">DFM</span>
+            <span class="tag rose">Ergonomics</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Let's build <em>something</em> together.</h2>
+    <p>Got a product idea, a prototyping problem, or a role you think I'd be great for? I'd love to hear about it.</p>
+    <a href="mailto:chavonnefields11@gmail.com" class="email-btn">chavonnefields11@gmail.com ✉</a>
+  </section>
+
+  <footer class="footer">
+    <div>© 2026 Chavonne Fields</div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:chavonnefields11@gmail.com">Email</a>
+      <a href="#">Resume</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 12);
+  });
+</script>
 </body>
 </html>
