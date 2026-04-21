@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cogsworth Clock — Chavonne Fields</title>
+<meta name="description" content="A character CAD study translating an animated clock into a printable 3D model.">
+<meta name="theme-color" content="#B5A5D1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+/* ============ CHAVONNE FIELDS — SITE STYLES ============ */
+
+:root {
+  --lav:#B5A5D1; --lavSoft:#D9CEEC; --lavDeep:#8A78B0;
+  --plum:#3D3358; --plumInk:#24193C;
+  --rose:#F5B6C5; --roseDeep:#D77F9A; --peach:#FFCFB8; --sage:#C5D4B5;
+  --cream:#FAF6EF; --paper:#FFFDF8; --muted:#6F6584;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Inter',sans-serif; background:var(--cream); color:#1A1428;
+  -webkit-font-smoothing:antialiased;
+}
+.page { max-width:1280px; background:var(--paper); margin:0 auto; }
+
+/* NAV */
+.nav {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 64px; background:var(--paper);
+  position:sticky; top:0; z-index:50;
+  border-bottom:1px solid transparent;
+  transition:border-color 0.2s;
+}
+.nav.scrolled { border-color:var(--lavSoft); }
+.logo {
+  font-weight:700; font-size:20px; color:var(--plum);
+  display:flex; align-items:center; gap:10px; letter-spacing:-0.01em;
+  white-space:nowrap; flex-shrink:0;
+  text-decoration:none;
+}
+.logo .dot {
+  width:10px; height:10px; background:var(--rose);
+  border-radius:50%;
+}
+.nav-links { display:flex; gap:36px; align-items:center; }
+.nav-links a {
+  text-decoration:none; color:var(--plum);
+  font-weight:500; font-size:15px;
+  transition:color 0.2s;
+}
+.nav-links a:hover { color:var(--roseDeep); }
+.nav-cta {
+  background:var(--plum) !important; color:var(--paper) !important;
+  padding:10px 20px;
+  border-radius:100px;
+  font-weight:600; font-size:14px;
+  text-decoration:none;
+  transition:transform 0.2s, background 0.2s;
+}
+.nav-cta:hover { background:var(--plumInk) !important; transform:translateY(-1px); }
+
+/* HERO — HOMEPAGE */
+.hero {
+  background:var(--lav);
+  padding:72px 64px 88px;
+  border-radius:0 0 32px 32px;
+}
+.hero-inner { display:flex; gap:64px; align-items:center; }
+.hero-left { flex:1; display:flex; flex-direction:column; gap:24px; align-items:flex-start; max-width:620px; }
+
+.status {
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--paper);
+  border:1px solid var(--lavSoft);
+  padding:8px 16px;
+  border-radius:100px;
+  font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--plum);
+}
+.status .d {
+  width:8px; height:8px; background:#4CAF50; border-radius:50%;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.6; transform:scale(1.15); }
+}
+
+.hero h1 {
+  font-weight:800; font-size:64px; line-height:1.02;
+  letter-spacing:-0.028em; color:var(--paper);
+}
+.hero h1 em { font-style:italic; font-weight:700; color:var(--rose); }
+
+.hero-sub {
+  font-size:18px; line-height:1.55; color:var(--paper);
+  opacity:0.92; max-width:520px;
+}
+.hero-sub strong { font-weight:600; }
+
+.cta-row { display:flex; gap:12px; margin-top:8px; flex-wrap:wrap; }
+
+/* BUTTONS */
+.btn {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:14px 24px;
+  border-radius:100px;
+  font-weight:600; font-size:15px; text-decoration:none; cursor:pointer; border:none;
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.btn-primary {
+  background:var(--rose); color:var(--plumInk);
+  box-shadow:4px 4px 0 var(--plumInk);
+}
+.btn-primary:hover {
+  transform:translate(-2px,-2px);
+  box-shadow:6px 6px 0 var(--plumInk);
+}
+.btn-ghost {
+  background:transparent; color:var(--paper);
+  border:2px solid var(--paper);
+}
+.btn-ghost:hover { background:var(--paper); color:var(--plum); }
+
+.btn-outline {
+  background:transparent; color:var(--plum); border:2px solid var(--plum);
+}
+.btn-outline:hover { background:var(--plum); color:var(--paper); }
+
+.meta { display:flex; gap:24px; font-size:14px; color:var(--paper); opacity:0.85; margin-top:8px; flex-wrap:wrap; }
+.meta a { color:inherit; text-decoration:none; transition:opacity 0.2s; }
+.meta a:hover { opacity:1; text-decoration:underline; }
+
+.hero-right { flex:0 0 400px; display:flex; justify-content:center; }
+.portrait {
+  width:400px; height:400px;
+  border-radius:50%;
+  background:linear-gradient(135deg, #E8DFF5, #C7B9DE);
+  border:3px solid var(--paper);
+  box-shadow:8px 8px 0 var(--plumInk);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; color:var(--plum); text-align:center;
+  opacity:0.9;
+  overflow:hidden;
+}
+.portrait img { width:100%; height:100%; object-fit:cover; }
+
+/* SKILLS STRIP */
+.skills-strip {
+  padding:36px 64px;
+  background:var(--paper);
+  display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+}
+.skill-label {
+  font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--lavDeep);
+  margin-right:20px;
+}
+.skill-pill {
+  background:var(--cream);
+  border:1px solid var(--lavSoft);
+  padding:8px 16px;
+  border-radius:100px;
+  font-size:13px; font-weight:500; color:var(--plum);
+  transition:transform 0.2s, border-color 0.2s;
+}
+.skill-pill:hover { transform:translateY(-2px); border-color:var(--roseDeep); }
+
+/* ABOUT */
+.about {
+  padding:80px 64px;
+  display:flex; gap:64px; align-items:flex-start;
+  background:var(--paper);
+}
+.about-left { flex:0 0 400px; display:flex; flex-direction:column; gap:16px; }
+.section-label {
+  font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--lavDeep);
+}
+.about h2 {
+  font-size:48px; font-weight:800; color:var(--plum);
+  letter-spacing:-0.025em; line-height:1.02;
+}
+.about h2 em { font-style:italic; font-weight:600; color:var(--roseDeep); }
+.about-right { flex:1; display:flex; flex-direction:column; gap:16px; }
+.about-right p { font-size:17px; line-height:1.65; color:var(--muted); }
+.about-right p strong { color:var(--plum); font-weight:600; }
+
+/* PROJECTS GRID */
+.projects {
+  padding:80px 64px 100px;
+  background:var(--cream);
+  display:flex; flex-direction:column; gap:40px;
+}
+.projects-header {
+  display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;
+}
+.projects-header h2 {
+  font-size:48px; font-weight:800; color:var(--plum);
+  letter-spacing:-0.025em; line-height:1.02;
+}
+.projects-header h2 em { font-style:italic; font-weight:600; color:var(--lavDeep); }
+.projects-count {
+  font-size:11px; font-weight:600; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--muted);
+}
+
+.project-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+
+.project-card {
+  background:var(--paper);
+  border:1px solid var(--lavSoft);
+  border-radius:24px;
+  overflow:hidden;
+  display:flex; flex-direction:column;
+  text-decoration:none; color:inherit;
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.project-card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 20px 40px -20px rgba(61,51,88,0.2);
+}
+.project-card:hover .arrow-circle { transform:translate(2px,-2px); }
+
+.card-image {
+  aspect-ratio: 16/10;
+  margin:16px;
+  border-radius:18px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; color:rgba(255,253,248,0.7);
+  position:relative;
+}
+.card-image.cog { background:linear-gradient(135deg, #D4C3E5, #8A78B0); }
+.card-image.sd  { background:linear-gradient(135deg, #FFCFB8, #C9A89A); }
+
+.year-pill {
+  position:absolute; top:14px; right:14px;
+  background:var(--paper);
+  padding:4px 10px;
+  border-radius:100px;
+  font-size:11px; font-weight:500; color:var(--plum); letter-spacing:0.04em;
+}
+
+.card-body { padding:8px 28px 28px; display:flex; flex-direction:column; gap:12px; }
+.card-title-row { display:flex; justify-content:space-between; align-items:center; gap:16px; }
+.card-title { font-size:26px; font-weight:700; color:var(--plum); letter-spacing:-0.015em; }
+.arrow-circle {
+  width:36px; height:36px;
+  background:var(--rose);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:15px; color:var(--plumInk); font-weight:600;
+  flex-shrink:0;
+  transition:transform 0.2s;
+}
+.card-desc { font-size:14px; line-height:1.6; color:var(--muted); }
+.tag-row { display:flex; gap:6px; flex-wrap:wrap; }
+.tag {
+  padding:5px 12px;
+  border-radius:100px;
+  font-size:11px; font-weight:500;
+  background:var(--lavSoft); color:var(--plum);
+}
+.tag.rose  { background:var(--rose); }
+.tag.peach { background:var(--peach); }
+.tag.sage  { background:var(--sage); }
+
+/* CTA STRIP */
+.cta {
+  background:var(--plum); color:var(--paper);
+  margin:0 64px 64px; border-radius:24px;
+  padding:64px 56px;
+  display:flex; flex-direction:column; align-items:center; gap:20px; text-align:center;
+}
+.cta h2 {
+  font-size:52px; font-weight:800; letter-spacing:-0.03em; line-height:1.02;
+  max-width:720px;
+}
+.cta h2 em { font-style:italic; font-weight:600; color:var(--rose); }
+.cta p {
+  font-size:17px; color:var(--paper); opacity:0.75;
+  max-width:500px; line-height:1.55;
+}
+.cta .email-btn {
+  margin-top:12px;
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--rose); color:var(--plumInk);
+  padding:16px 28px;
+  border-radius:100px;
+  font-weight:600; font-size:15px; text-decoration:none;
+  box-shadow:4px 4px 0 var(--plumInk);
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.cta .email-btn:hover {
+  transform:translate(-2px,-2px);
+  box-shadow:6px 6px 0 var(--plumInk);
+}
+
+/* FOOTER */
+.footer {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:28px 64px 48px;
+  color:var(--muted); font-size:13px;
+  flex-wrap:wrap; gap:16px;
+}
+.footer-links { display:flex; gap:24px; }
+.footer-links a {
+  color:var(--plum); text-decoration:none; font-weight:500;
+  transition:color 0.2s;
+}
+.footer-links a:hover { color:var(--roseDeep); }
+
+/* ============ PROJECT DETAIL PAGES ============ */
+
+.detail-hero {
+  padding:40px 64px 64px;
+  background:var(--paper);
+  display:flex; flex-direction:column; gap:28px;
+}
+
+.back-link {
+  display:inline-flex; align-items:center; gap:6px;
+  text-decoration:none; color:var(--plum);
+  font-size:13px; font-weight:600; letter-spacing:0.04em;
+  align-self:flex-start;
+  transition:gap 0.2s;
+}
+.back-link:hover { gap:10px; color:var(--roseDeep); }
+
+.detail-hero h1 {
+  font-size:88px; font-weight:800; color:var(--plum);
+  letter-spacing:-0.035em; line-height:0.98;
+  max-width:1000px;
+}
+.detail-hero h1 em { font-style:italic; font-weight:700; color:var(--lavDeep); }
+
+.detail-sub {
+  font-size:20px; color:var(--muted); line-height:1.55; max-width:720px;
+}
+
+.spec-row {
+  display:grid; grid-template-columns:repeat(4,1fr); gap:24px;
+  border-top:2px dashed var(--lavSoft);
+  padding-top:28px; margin-top:8px;
+}
+.spec { display:flex; flex-direction:column; gap:6px; }
+.spec-label {
+  font-size:11px; font-weight:600; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--lavDeep);
+}
+.spec-val { font-size:17px; font-weight:600; color:var(--plum); }
+
+/* hero image (big render) */
+.hero-render {
+  margin:0 64px;
+  aspect-ratio:16/9;
+  border-radius:24px;
+  border:3px solid var(--paper);
+  box-shadow:8px 8px 0 var(--plumInk);
+  display:flex; align-items:center; justify-content:center;
+  color:rgba(255,253,248,0.8); font-size:14px;
+}
+.hero-render.cog { background:linear-gradient(135deg, #D4C3E5, #8A78B0); }
+.hero-render.sd  { background:linear-gradient(135deg, #FFCFB8, #C9A89A); }
+
+/* overview quote */
+.overview {
+  padding:96px 64px 72px;
+  display:grid; grid-template-columns:320px 1fr; gap:64px;
+  background:var(--paper);
+}
+.overview-label { align-self:flex-start; }
+.overview-quote {
+  font-size:26px; font-weight:500; font-style:italic;
+  color:var(--plum); line-height:1.45;
+  border-left:4px solid var(--roseDeep);
+  padding-left:28px;
+}
+
+/* process cards */
+.process {
+  padding:80px 64px;
+  background:var(--cream);
+  display:flex; flex-direction:column; gap:40px;
+}
+.process-header {
+  display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;
+}
+.process-header h2 {
+  font-size:44px; font-weight:800; color:var(--plum);
+  letter-spacing:-0.025em; line-height:1.02;
+}
+.process-header h2 em { font-style:italic; font-weight:600; color:var(--lavDeep); }
+
+.process-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+
+.process-card {
+  background:var(--paper);
+  border:1px solid var(--lavSoft);
+  border-radius:24px;
+  padding:32px 28px;
+  display:flex; flex-direction:column; gap:14px;
+  min-height:260px;
+}
+.process-num {
+  font-size:64px; font-weight:800; font-style:italic;
+  color:var(--roseDeep); letter-spacing:-0.02em; line-height:0.9;
+}
+.process-step-label {
+  font-size:11px; font-weight:600; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--lavDeep);
+}
+.process-title {
+  font-size:22px; font-weight:700; color:var(--plum);
+  letter-spacing:-0.01em;
+}
+.process-body {
+  font-size:14px; color:var(--muted); line-height:1.6;
+}
+
+/* gallery */
+.gallery {
+  padding:80px 64px;
+  background:var(--paper);
+  display:flex; flex-direction:column; gap:24px;
+}
+.gallery-header {
+  display:flex; flex-direction:column; gap:6px;
+}
+.gallery-header h2 {
+  font-size:44px; font-weight:800; color:var(--plum);
+  letter-spacing:-0.025em; line-height:1.02;
+}
+.gallery-header h2 em { font-style:italic; font-weight:600; color:var(--lavDeep); }
+
+.gallery-grid { display:grid; grid-template-columns:2fr 1fr; gap:20px; align-items:stretch; }
+.gallery-stack { display:flex; flex-direction:column; gap:20px; }
+
+.gallery-tile {
+  aspect-ratio:4/3;
+  min-height:220px;
+  border-radius:20px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; color:rgba(255,253,248,0.75);
+}
+.gallery-stack .gallery-tile { flex:1; min-height:220px; }
+.gallery-tile.wide { aspect-ratio:auto; min-height:460px; height:100%; }
+.gallery-tile.v1 { background:linear-gradient(135deg,#C7B9DE,#8A78B0); }
+.gallery-tile.v2 { background:linear-gradient(135deg,#E8DFF5,#B5A5D1); }
+.gallery-tile.v3 { background:linear-gradient(135deg,#D9CEEC,#8A78B0); }
+.gallery-tile.s1 { background:linear-gradient(135deg,#FFCFB8,#D77F9A); }
+.gallery-tile.s2 { background:linear-gradient(135deg,#F5B6C5,#D77F9A); }
+.gallery-tile.s3 { background:linear-gradient(135deg,#FFCFB8,#C9A89A); }
+
+/* outcomes */
+.outcomes {
+  padding:80px 64px;
+  background:var(--cream);
+  display:flex; flex-direction:column; gap:40px;
+}
+.outcomes h2 {
+  font-size:44px; font-weight:800; color:var(--plum);
+  letter-spacing:-0.025em; line-height:1.02;
+}
+.outcomes h2 em { font-style:italic; font-weight:600; color:var(--roseDeep); }
+.outcomes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.stat-card {
+  padding:36px 28px;
+  border-radius:24px;
+  display:flex; flex-direction:column; gap:12px;
+  min-height:220px;
+  border:1px solid transparent;
+}
+.stat-card.rose  { background:var(--rose); }
+.stat-card.lav   { background:var(--lavSoft); }
+.stat-card.peach { background:var(--peach); }
+.stat-num {
+  font-size:68px; font-weight:800; color:var(--plumInk);
+  letter-spacing:-0.03em; line-height:0.9;
+}
+.stat-label {
+  font-size:15px; font-weight:600; color:var(--plumInk);
+  line-height:1.45;
+}
+
+/* next project */
+.next-project {
+  margin:0 64px 64px;
+  padding:48px 48px;
+  background:var(--lav); color:var(--paper);
+  border-radius:24px;
+  display:flex; justify-content:space-between; align-items:center;
+  gap:24px; flex-wrap:wrap;
+  text-decoration:none;
+  transition:transform 0.2s;
+}
+.next-project:hover { transform:translateY(-4px); }
+.next-project:hover .arrow-circle { transform:translate(2px,-2px); }
+.next-left { display:flex; flex-direction:column; gap:8px; }
+.next-label {
+  font-size:11px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--paper); opacity:0.75;
+}
+.next-title {
+  font-size:36px; font-weight:800; color:var(--paper);
+  letter-spacing:-0.02em; line-height:1;
+}
+.next-title em { font-style:italic; font-weight:700; color:var(--rose); }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .nav { padding:16px 24px; }
+  .nav-links { gap:20px; }
+  .nav-links a:not(.nav-cta) { display:none; }
+
+  .hero { padding:56px 24px 72px; }
+  .hero-inner { flex-direction:column-reverse; gap:40px; }
+  .hero-left { max-width:100%; }
+  .hero h1 { font-size:44px; }
+  .hero-sub { font-size:16px; }
+  .hero-right { flex:none; }
+  .portrait { width:280px; height:280px; box-shadow:6px 6px 0 var(--plumInk); }
+
+  .skills-strip { padding:28px 24px; }
+
+  .about { flex-direction:column; gap:24px; padding:56px 24px; }
+  .about-left { flex:none; }
+  .about h2 { font-size:36px; }
+  .about-right p { font-size:16px; }
+
+  .projects { padding:56px 24px 72px; }
+  .projects-header h2 { font-size:36px; }
+  .project-grid { grid-template-columns:1fr; }
+
+  .cta { margin:0 24px 40px; padding:48px 28px; }
+  .cta h2 { font-size:36px; }
+  .cta p { font-size:15px; }
+
+  .footer { padding:24px 24px 40px; }
+
+  /* project detail */
+  .detail-hero { padding:32px 24px 48px; }
+  .detail-hero h1 { font-size:48px; }
+  .detail-sub { font-size:17px; }
+  .spec-row { grid-template-columns:1fr 1fr; gap:20px; }
+  .hero-render { margin:0 24px; }
+
+  .overview { padding:56px 24px; grid-template-columns:1fr; gap:20px; }
+  .overview-quote { font-size:22px; }
+
+  .process { padding:56px 24px; }
+  .process-header h2 { font-size:32px; }
+  .process-grid { grid-template-columns:1fr; }
+
+  .gallery { padding:56px 24px; }
+  .gallery-header h2 { font-size:32px; }
+  .gallery-grid { grid-template-columns:1fr; }
+
+  .outcomes { padding:56px 24px; }
+  .outcomes h2 { font-size:32px; }
+  .outcomes-grid { grid-template-columns:1fr; }
+  .stat-num { font-size:56px; }
+
+  .next-project { margin:0 24px 40px; padding:32px 24px; }
+  .next-title { font-size:26px; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size:36px; }
+  .cta h2 { font-size:30px; }
+  .about h2, .projects-header h2 { font-size:30px; }
+  .portrait { width:240px; height:240px; }
+  .detail-hero h1 { font-size:38px; }
+}
+
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav class="nav" id="nav">
+    <a href="index.html#top" class="logo"><span class="dot"></span><span>Chavonne Fields</span></a>
+    <div class="nav-links">
+      <a href="index.html#about">About</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="#">Resume</a>
+      <a href="mailto:chavonnefields11@gmail.com" class="nav-cta">Contact →</a>
+    </div>
+  </nav>
+
+  <section class="detail-hero">
+    <a href="index.html#projects" class="back-link">← All Projects</a>
+    <div class="tag-row">
+      <span class="tag">Fusion 360</span>
+      <span class="tag rose">3D Printing</span>
+      <span class="tag peach">Assembly</span>
+    </div>
+    <h1>Cogsworth <em>Clock</em>.</h1>
+    <p class="detail-sub">A character CAD study translating a beloved animated clock into a printable 3D model — fabrication constraints drove every design decision, from clearance fits to split-line placement.</p>
+    <div class="spec-row">
+      <div class="spec"><div class="spec-label">Year</div><div class="spec-val">2025</div></div>
+      <div class="spec"><div class="spec-label">Role</div><div class="spec-val">CAD · DFM · Assembly</div></div>
+      <div class="spec"><div class="spec-label">Duration</div><div class="spec-val">6 weeks</div></div>
+      <div class="spec"><div class="spec-label">Output</div><div class="spec-val">Printable multi-part model</div></div>
+    </div>
+  </section>
+
+  <div class="hero-render cog">[ hero render · 16:9 ]</div>
+
+  <section class="overview">
+    <div class="overview-label">
+      <div class="section-label">Overview</div>
+    </div>
+    <p class="overview-quote">"The goal was a model that looks like Cogsworth from across the room and still prints cleanly on a hobby FDM machine — which meant every feature had to earn its place against overhangs, tolerances, and part count."</p>
+  </section>
+
+  <section class="process">
+    <div class="process-header">
+      <h2>How it <em>came together</em>.</h2>
+      <div class="projects-count">Process · 03 steps</div>
+    </div>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="process-num">01</div>
+        <div class="process-step-label">Step 01 · Reference</div>
+        <div class="process-title">Character study</div>
+        <div class="process-body">Pulled screengrabs and film stills, mapped Cogsworth's proportions onto a clean silhouette sheet, and flagged the features that had to stay (cross-hatched face, ornate feet) vs. the ones I could simplify without losing the read.</div>
+      </div>
+      <div class="process-card">
+        <div class="process-num">02</div>
+        <div class="process-step-label">Step 02 · CAD</div>
+        <div class="process-title">Part breakdown</div>
+        <div class="process-body">Built the body as a split shell to hide seams at parting lines. Designed the pendulum, arms, and base as separate components with 0.2mm clearance press fits so the model could be printed in pieces and snapped together without glue.</div>
+      </div>
+      <div class="process-card">
+        <div class="process-num">03</div>
+        <div class="process-step-label">Step 03 · Print</div>
+        <div class="process-title">Iterate &amp; tune</div>
+        <div class="process-body">Printed three prototypes tuning overhang angles, wall thicknesses, and fit tolerances. Moved from PLA to PETG for the moving parts once the kinematics were locked, and added small chamfers on every mating edge to make first-time assembly forgiving.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="gallery-header">
+      <div class="section-label">Gallery</div>
+      <h2>CAD <em>to part</em>.</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-tile wide v1">[ exploded view ]</div>
+      <div class="gallery-stack">
+        <div class="gallery-tile v2">[ CAD section ]</div>
+        <div class="gallery-tile v3">[ printed part ]</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="outcomes">
+    <h2>What it <em>shipped</em>.</h2>
+    <div class="outcomes-grid">
+      <div class="stat-card rose">
+        <div class="stat-num">11</div>
+        <div class="stat-label">Printable parts in the final assembly</div>
+      </div>
+      <div class="stat-card lav">
+        <div class="stat-num">0.2<span style="font-size:32px; font-weight:700;">mm</span></div>
+        <div class="stat-label">Clearance dialed in for clean press fits</div>
+      </div>
+      <div class="stat-card peach">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Prototype rounds before the assembly snapped together on the first try</div>
+      </div>
+    </div>
+  </section>
+
+  <a href="screwdriver.html" class="next-project">
+    <div class="next-left">
+      <div class="next-label">Next Project</div>
+      <div class="next-title">Electric <em>Screwdriver</em></div>
+    </div>
+    <div class="arrow-circle">→</div>
+  </a>
+
+  <section class="cta">
+    <h2>Want to see <em>more</em>?</h2>
+    <p>Happy to walk through the CAD, share print files, or talk process over coffee.</p>
+    <a href="mailto:chavonnefields11@gmail.com" class="email-btn">chavonnefields11@gmail.com ✉</a>
+  </section>
+
+  <footer class="footer">
+    <div>© 2026 Chavonne Fields</div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:chavonnefields11@gmail.com">Email</a>
+      <a href="#">Resume</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 12);
+  });
+</script>
+</body>
+</html>
